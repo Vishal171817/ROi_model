@@ -3,14 +3,17 @@ import argparse
 
 def convert_manifest_to_yolo(filename,yolo_directory,manifest_job_name):
   with open(filename) as fp:
-    Lines = fp.readLines()
+    Lines = fp.readlines()
     for line in Lines:
       dict1 = {}
       dict1.update(json.loads(line.strip()))
-      if(len(dict1['source-ref'])>0):
+      if(len(dict1['source-ref']) >0 ):
         source_id= dict1['source-ref']
-        x=source_id.split("/")[3].split(".")[0]+'.txt'
+        x=source_id.split('/')[4].split(".")[0]+'.txt'
+        print("x",x)
+        print("dir",yolo_directory)
         name= yolo_directory+x
+        print("name",name)
         if (len(dict1[manifest_job_name]['annotations'])>0):
           print(name)
           with open(name,'w') as filehandle:
